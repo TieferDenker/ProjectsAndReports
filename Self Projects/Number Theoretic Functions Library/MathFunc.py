@@ -513,6 +513,29 @@ def weirdp(n):
        return 1
     return 0
 
+def floorharmonic(n):
+    s=0
+    for i in range(1,n+1):
+        s=s+1/i
+    return floor(s)
+
+def nthcatalan(n):
+    p=1
+    for i in range(1,n+1):
+        p=p*(4*i-2)/(i+1)
+    return p
+
+def factzero(n):
+    p=5
+    s=0
+    while n>=p:
+        s=s+floor(n/p)
+        p=p*5
+    return s
+
+def beta(m,n):
+    return (factorial(m-1)*factorial(m-1))/factorial(m+n-1)
+
 
 Number_Of_Terms = 5
 
