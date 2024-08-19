@@ -28,6 +28,9 @@ zeta_3 = 1.2020569031595942853997381
 # Small primes for deterministic primality testing
 SMALL_PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53]
 
+# Constants and arrays for Ramanujan mathematics
+Number_Of_Terms = 5
+
 #Function Definitions:
 
 ###########################################################################################################
@@ -256,12 +259,12 @@ def rev(n):
     return int(s)
 
 ###########################################################################################################
-# Function          : pi
+# Function          : π
 # Description       : This function returns the number of primes less than or equal to 'n'.
 # Input parameters  : A natural number
 # Return value      : π(n)
 ###########################################################################################################
-def pi(n):
+def π(n):
     c = 0
     for k in range(1,n+1):
         c = c + is_prime(k)
@@ -457,36 +460,43 @@ def angpri(n):
            p=900*k*k+600*k+101
            q=900*k*k+1200*k+401
            if prime(p)==1 and prime(p+2)==1 and prime(2*p+1)==1:
-              print(p)
-              c=c+1
-              #if prime(q)==1 and prime(q+2)==1 and prime(2*q+1)==1:
-                 #print(k)
-                 #c=c+1
-           elif prime(q)==1 and prime(q+2)==1 and prime(2*q+1)==1:
-                print(q)
+                c=c+1
+           if prime(q)==1 and prime(q+2)==1 and prime(2*q+1)==1:
                 c=c+1
     return c
 
+###########################################################################################################
+# Function          : hcn
+# Description       : This function returns true if n is a highly composite number, else it returns false
+# Input parameters  : A natural number
+# Return value      : hcn(n)
+###########################################################################################################
 def hcn(n):
     c=0
     for i in range(1,n):
             if d(n)>d(i):
                 c=c+1
     if c==n-1:
-       return 1
+        return True
     else:
-          return 0
+        return False
 
+###########################################################################################################
+# Function          : semip
+# Description       : This function returns true if n is a semi prime, else it returns false
+# Input parameters  : A natural number
+# Return value      : semip(n)
+###########################################################################################################
 def semip(n):
     for i in range(2,int(n**0.5)+1):
         if prime(i)==1 and n%i==0 and prime(n/i)==1:
-           return 1
-    return 0
+           return True
+    return False
 
 def prigap(n):
     i=2
     while (True):
-        if prime(i+n)==1 and prime(i)==1 and pi(i+n)-pi(i)==1 :
+        if prime(i+n)==1 and prime(i)==1 and π(i+n)-π(i)==1 :
             return i
         i=i+1
     return 0
@@ -536,8 +546,6 @@ def factzero(n):
 def beta(m,n):
     return (factorial(m-1)*factorial(m-1))/factorial(m+n-1)
 
-
-Number_Of_Terms = 5
 
 ###########################################################################################################
 # Function          : SawTooth
@@ -679,6 +687,12 @@ def a(d):
     E6 = E2k(3,tau)
     return (b(d)/6)*(1-(E4/E6)*(E2-(6/(pi*sqrt(d)))))
 
+###########################################################################################################
+# Function          : CalculatePi
+# Description       : This function returns the value of pi using j function and modular forms method
+# Input parameters  : A natural number d (preferably a num from HeegnerNum = [1, 2, 3, 7, 11, 19, 43, 67, 163])
+# Return value      : CalculatePi(d)
+###########################################################################################################
 def CalculatePi(d):
     N = 5
     Sum = 0
@@ -686,18 +700,13 @@ def CalculatePi(d):
     A = a(d)
     B = b(d)
     J = j(tau)
-    print(A, B, J)
+    # print(A, B, J)
     for n in range(0,N+1):
         F = factorial(6*n)/(factorial(3*n)*(pow(factorial(n),3)))
         G = (A+n*B)/pow(J,n)
         Sum = Sum + F*G
-    return cmath.sqrt(-J)/Sum
+    x = cmath.sqrt(-J)/Sum
+    return x.real
 
-HeegnerNum = [1, 2, 3, 7, 11, 19, 43, 67, 163]
-
-for d in HeegnerNum:
-    try:
-        print(d)
-        print(CalculatePi(d))
-    except ZeroDivisionError:
-        continue
+# d = 100
+# print(CalculatePi(d))
