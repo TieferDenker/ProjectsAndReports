@@ -493,21 +493,39 @@ def semip(n):
            return True
     return False
 
+###########################################################################################################
+# Function          : prigap
+# Description       : This function returns a prime number (p) such that (p+n) is also a prime and primes are there in between them
+# Input parameters  : A natural number
+# Return value      : prigap(n)
+###########################################################################################################
 def prigap(n):
-    i=2
+    i = 2
     while (True):
         if prime(i+n)==1 and prime(i)==1 and π(i+n)-π(i)==1 :
             return i
         i=i+1
     return 0
 
+###########################################################################################################
+# Function          : omega
+# Description       : This function returns the total number of distinct prime factors of n
+# Input parameters  : A natural number
+# Return value      : Ω(n)
+###########################################################################################################
 def omega(n):
-    count=0
+    count = 0
     for i in range(2,n+1):
         if prime(i)==1 and n%i==0:
-            count=count+powofpri(n,i)
+            count = count+powofpri(n,i)
     return count
 
+###########################################################################################################
+# Function          : angch
+# Description       : This function returns the last number of the Angad chain
+# Input parameters  : A natural number
+# Return value      : angch(n)
+###########################################################################################################
 def angch(n):
     m=d(n)+1
     while prime(d(n)+1)!=1:
